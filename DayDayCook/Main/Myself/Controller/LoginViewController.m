@@ -19,6 +19,7 @@
 
 @implementation LoginViewController
 -(void)awakeFromNib{
+    [super awakeFromNib];
     [self loadSubViews];
 }
 
@@ -87,9 +88,7 @@
 
 -(void)registAction:(UIButton *)btn{
     RegistViewController *registVC = [[UIStoryboard storyboardWithName:@"MyselfStoryboard" bundle:nil]instantiateViewControllerWithIdentifier:@"regist_ID"];
-    
     [self presentViewController:registVC animated:YES completion:nil];
-    
 }
 
 - (IBAction)returnBtn:(UIButton *)sender {

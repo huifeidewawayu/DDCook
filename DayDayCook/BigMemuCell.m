@@ -26,7 +26,7 @@
 @implementation BigMemuCell
 
 - (void)awakeFromNib {
-    
+    [super awakeFromNib];
 }
 
 -(void)setModel:(MenuModel *)model{

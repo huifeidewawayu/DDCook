@@ -21,6 +21,7 @@
 @implementation BigTabView
 
 -(void)awakeFromNib{
+    [super awakeFromNib];
     self.delegate = self;
     self.dataSource = self;
 }

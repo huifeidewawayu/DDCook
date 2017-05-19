@@ -33,6 +33,7 @@
 }
 
 -(void)awakeFromNib{
+    [super awakeFromNib];
     _webView = [[UIWebView alloc]initWithFrame:self.view.bounds];
     [self.view addSubview:_webView];
     _webView.scrollView.contentInset = UIEdgeInsetsMake(kScreenwidth, 0, 49, 0);

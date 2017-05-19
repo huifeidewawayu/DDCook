@@ -16,19 +16,14 @@
 @property (weak, nonatomic) IBOutlet UISwitch *choseBtn;
 @property (weak, nonatomic) IBOutlet UILabel *rigionLabel;
 
-
 - (IBAction)choseBtn:(UISwitch *)sender;
-
 
 @end
 
+
 @implementation ConfigViewController
-
-
-
-
-
 -(void)awakeFromNib{
+    [super awakeFromNib];
     self.tableView.delegate = self;
     //self.tableView.dataSource = self;
 }
@@ -36,11 +31,9 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     self.title = @"设置";
-    
     _choseBtn.onImage = [UIImage imageNamed:@"accept_on_bg~iphone"];
     
 }
-
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -56,7 +49,6 @@
     }
 }
 
-
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section == 0) {
         return 0.1;
@@ -66,10 +58,9 @@
     return 50;
 }
 
-
 - (IBAction)choseBtn:(UISwitch *)sender {
-}
 
+}
 
 #pragma mark - UITableViewDelegate
 
@@ -89,16 +80,13 @@
         [alertCtrl addAction:action2];
         [self.navigationController presentViewController:alertCtrl animated:YES completion:nil];
     }else if (indexPath.section == 1){
-    
         if (indexPath.row ==1) {
-            
             RegionViewController *regionVC = [[RegionViewController alloc]init];
             [regionVC setMyblock:^(NSString *a) {
                 _rigionLabel.text = a;
                 [[NSUserDefaults standardUserDefaults]setValue:a forKey:@"regions"];
             }];
             [self.navigationController pushViewController:regionVC animated:YES];
-            
         }
     }
 }
@@ -109,5 +97,6 @@
     float cache = size/1024.0/1024;
     _cacheLabel.text = [NSString stringWithFormat:@"%.2fM",cache];
 }
+
 
 @end
