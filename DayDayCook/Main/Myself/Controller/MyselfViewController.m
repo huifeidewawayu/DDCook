@@ -43,7 +43,7 @@
     
 }
 
--(void)configViews{
+- (void)configViews {
     _backBtn.layer.cornerRadius = 5;
     _backBtn.layer.borderColor = [UIColor orangeColor].CGColor;
     _backBtn.layer.borderWidth = 1;

@@ -9,10 +9,10 @@
 #import "SearchViewController.h"
 #import "Common.h"
 
-@interface SearchViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface SearchViewController ()<UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate>
 
-@property (nonatomic, assign) id<UIGestureRecognizerDelegate> popGestureDelegate;
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UITextField *textFL;
 
 @end
 
@@ -30,7 +30,7 @@
     self.view.backgroundColor = [UIColor clearColor];
     self.view.superview.backgroundColor = [UIColor whiteColor];
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-
+    
     [self setupSubViews];
     [self searchBar];
 }
@@ -49,6 +49,8 @@
     UITextField *searchText = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 275 * kMDFScale, 30)];
     searchText.placeholder = @"食材/菜谱/主题";
     searchText.font = [UIFont systemFontOfSize:17 * kMDFScale];
+    searchText.delegate = self;
+    self.textFL = searchText;
     self.navigationItem.titleView = searchText;
     UIButton *rightBut = [UIButton buttonWithType:UIButtonTypeCustom];
     rightBut.frame = CGRectMake(0, 0, 40 * kMDFScale, 17 * kMDFScale);
@@ -60,7 +62,14 @@
 }
 
 - (void)backAction {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.textFL resignFirstResponder];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.navigationController popViewControllerAnimated:YES];
+    });
+}
+
+- (void)tapAction {
+    [self.textFL resignFirstResponder];
 }
 
 #pragma mark  ---UITableViewDelegate & UITableViewDataSource
@@ -127,7 +136,10 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
+        [_tableView addGestureRecognizer:tap];
     }
     return _tableView;
 }
+
 @end

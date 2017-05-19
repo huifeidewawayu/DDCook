@@ -10,15 +10,11 @@
 
 @interface LoginViewController : UIViewController
 
-- (IBAction)returnBtn:(UIButton *)sender;
 
+- (IBAction)returnBtn:(UIButton *)sender;
 - (IBAction)weiBtn:(UIButton *)sender;
 - (IBAction)blogBtn:(UIButton *)sender;
 - (IBAction)qqBtn:(UIButton *)sender;
 - (IBAction)faceBtn:(UIButton *)sender;
-
-
-
-
 
 @end

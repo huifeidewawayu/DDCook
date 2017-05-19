@@ -9,16 +9,25 @@
 #import "LoginViewController.h"
 #import "Common.h"
 #import "RegistViewController.h"
+@interface LoginViewController () <UITextFieldDelegate>
+
+@property (nonatomic, strong) UITextField *phoneNum;
+@property (nonatomic, strong) UITextField *key;
+
+@end
 
 
 @implementation LoginViewController
-
-
-
 -(void)awakeFromNib{
     [self loadSubViews];
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.phoneNum resignFirstResponder];
+        [self.key resignFirstResponder];
+    }];
+}
 
 -(void)loadSubViews{
     
@@ -28,6 +37,8 @@
 
     UITextField *textFile1 = [[UITextField alloc]initWithFrame:CGRectMake(60, 200, kScreenwidth-90, 30)];
     textFile1.placeholder = @"输入手机号";
+    textFile1.delegate = self;
+    self.phoneNum = textFile1;
     [self.view addSubview:textFile1];
     
     UIImageView *line1 = [[UIImageView alloc]initWithFrame:CGRectMake(30, 240, kScreenwidth-60, 1)];
@@ -41,6 +52,8 @@
     
     UITextField *textFile2 = [[UITextField alloc]initWithFrame:CGRectMake(60, 250, kScreenwidth-90, 30)];
     textFile2.placeholder = @"密码";
+    textFile2.delegate = self;
+    self.key = textFile2;
     [self.view addSubview:textFile2];
     
     UIImageView *line2 = [[UIImageView alloc]initWithFrame:CGRectMake(30, 290, kScreenwidth-60, 1)];
@@ -80,7 +93,11 @@
 }
 
 - (IBAction)returnBtn:(UIButton *)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.phoneNum resignFirstResponder];
+    [self.key resignFirstResponder];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    });
 }
 
 - (IBAction)weiBtn:(UIButton *)sender {
